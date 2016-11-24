@@ -1,0 +1,17 @@
+.DS_Store
+*.pyc
+
+# Flask files
+bin/
+include/
+lib/
+local/
+pip-selfcheck.json
+
+# Node
+node_modules/
+
+# Build Files
+static/images/icons/icon-sprite.svg
+static/scripts/build/
+static/styles/build/

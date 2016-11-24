@@ -1,0 +1,28 @@
+form {
+	text-align: center;
+	margin-top: 2.5rem;
+}
+
+input[type="text"],
+input[type="submit"] {
+	height: 2.75rem;
+}
+
+input[type="text"] {
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid dashed var(--vibe-blue);
+	margin-right: 0.375rem;
+	
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type="submit"] {
+	background: transparent;
+	color: var(--vibe-blue);
+	padding: 0.375rem 0.75rem;
+	border: 2px solid var(--vibe-blue);
+	outline: none;
+}
