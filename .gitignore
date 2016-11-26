@@ -13,6 +13,6 @@ pip-selfcheck.json
 node_modules/
 
 # Build Files
-static/images/icons/icon-sprite.svg
-static/scripts/build/
-static/styles/build/
+app/static/images/icons/icon-sprite.svg
+app/static/scripts/build/
+app/static/styles/build/
