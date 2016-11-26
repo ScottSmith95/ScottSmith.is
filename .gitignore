@@ -1,7 +1,7 @@
 .DS_Store
 *.pyc
 
-# Flask files
+# Flask
 bin/
 include/
 lib/
