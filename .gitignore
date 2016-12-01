@@ -1,6 +1,7 @@
 .DS_Store
 *.pyc
 .Python
+app/data.json
 
 # Flask
 bin/
