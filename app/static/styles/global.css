@@ -16,7 +16,7 @@ main {
 	max-width: 45rem;
 	font-size: 1.5rem;
 	margin: 0 auto 5rem;
-	
+
 	@media (min-width: 65em) {
 		max-width: 65rem;
 	}
@@ -24,6 +24,7 @@ main {
 	h1 {
 		margin: 2.5rem auto 0;
 		text-align: center;
+    color: var(--offwhite);
 		font: italic normal 700 5rem/1.2 "Didot", sans-serif;
 	}
 }
@@ -31,16 +32,18 @@ main {
 .response-text {
 	max-width: 45rem;
 	background-color: #EDEDED;
+  color: var(--darkgrey);
 	font-family: monospace;
 	padding: 2.25rem;
 	margin: 2.5rem auto;
+  box-shadow: 0 3px 50px rgba(255, 255, 255, 0.3);
 }
 
 .decor-triangle {
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 25vw;
+	width: 50vw;
 	max-width: 20rem;
 	height: auto;
 }
