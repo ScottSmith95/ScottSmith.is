@@ -25,7 +25,7 @@ main {
 		margin: 2.5rem auto 0;
 		text-align: center;
     color: var(--offwhite);
-		font: italic normal 700 5rem/1.2 "Didot", sans-serif;
+		font: italic normal 5rem/1.2 "Didot", sans-serif;
 	}
 }
 
