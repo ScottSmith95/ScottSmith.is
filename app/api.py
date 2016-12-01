@@ -51,18 +51,28 @@ class Response():
 
 fname = 'app/data.json'
 
-def readResponses(display=False):
-	try:
-		with open(fname, 'r') as datafile:
-			datafile = json.load(datafile)
-			if display == False:
-				return datafile
-			else:
-				responses = createResponseList(datafile)
-				return displayResponses(responses)
-	except:
-		print('Data file read failed.', file=sys.stderr)
-		return None
+def createDatafile():
+	file = open(fname, 'w')
+	file.write('{}')
+	file.close
+
+def readResponses(display=False, tries=2):
+	for i in range(tries):
+		try:
+			with open(fname, 'r') as datafile:
+				datafile = json.load(datafile)
+				if display == False:
+					return datafile
+				else:
+					responses = createResponseList(datafile)
+					return displayResponses(responses)
+		# If data file is missing, create it and retry.
+		except FileNotFoundError:
+			createDatafile()
+			continue
+		except:
+			print('Data file read failed.', file=sys.stderr)
+			return None
 
 def saveResponse(input):
 	postdata = readResponses()
@@ -84,10 +94,16 @@ def getResponses():
 			responses = readResponses(display=True)
 		else:
 			responses = readResponses()
-		return jsonify(responses)
+
+		# Throw basic error message if json can't be parsed.
+		if responses == None:
+			error_json = {'error': 'File read error'}
+			return make_response(jsonify(error_json), 500)
+		else:
+			return jsonify(responses)
 	except:
 		error_json = {'error': 'Not found'}
-		return make_response(jsonify(error_json), 404)
+		return make_response(jsonify(error_json), 500)
 
 @app.route('/api/v1.0/add_response', methods=['POST'])
 def addResponse():
