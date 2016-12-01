@@ -18,9 +18,9 @@ def isNonemptyResponse(input):
 # 		return False
 	return True
 
-def isUniqueResponse(postdata, input):
-	for response in postdata:
-		if postdata[response] == input:
+def isUniqueResponse(data, input):
+	for response in data:
+		if data[response] == input:
 			return False
 	return True
 
@@ -78,12 +78,14 @@ def readResponses(display=False, tries=2):
 			return None
 
 def saveResponse(input):
-	postdata = readResponses()
-	if isNonemptyResponse(input) and isUniqueResponse(postdata, input):
-		postdata[get_timestamp()] = sanitiseInput(input)
+	data = readResponses()
+	if isNonemptyResponse(input) and isUniqueResponse(data, input):
+		new_info = {}
+		new_info[get_timestamp()] = sanitiseInput(input)
+		data.update(new_info)
 		try:
 			with open(fname, 'w') as datafile:
-				json.dump(postdata, datafile)
+				json.dump(data, datafile, sort_keys=True, indent=2)
 		except:
 			print('Data file save failed.', file=sys.stderr)
 			return None
