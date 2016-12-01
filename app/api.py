@@ -59,7 +59,6 @@ def readResponses(display=False):
 				return datafile
 			else:
 				responses = createResponseList(datafile)
-				print(responses, file=sys.stderr)
 				return displayResponses(responses)
 	except:
 		print('Data file read failed.', file=sys.stderr)
