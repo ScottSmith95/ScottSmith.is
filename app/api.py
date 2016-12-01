@@ -25,7 +25,7 @@ def isUniqueResponse(postdata, input):
 
 def sanitiseInput(input):
 	input = str(input)
-	input = input.replace(".", "").replace(" ", "")
+	input = input.rstrip('.,:;!?').rstrip()
 	return input
 
 fname = 'app/data.json'
