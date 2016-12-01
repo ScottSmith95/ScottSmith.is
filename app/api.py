@@ -1,5 +1,3 @@
-from __future__ import print_function # In python 2.7
-
 from app import app
 from flask import jsonify, make_response, request, abort
 
@@ -36,15 +34,17 @@ def createResponseList(data):
 		resp_item['message'] = data[resp]
 		responses.append(Response(resp_item))
 	return responses
-	
+
 def displayResponses(responses):
-	return sorted(responses, key=lambda x: x.timestamp)
+	responses.sort(key=lambda x: x.timestamp, reverse=True)
+	display_responses = [r.message for r in responses]
+	return display_responses
 
 class Response():
 	def __init__(self, resp_item):
 		self.timestamp = resp_item['timestamp']
 		self.message = resp_item['message']
-		
+
 	def __str__(self):
 		return_str = 'Message: %s\nTimestamp: %s\n\n' % (self.message, self.timestamp)
 		return return_str
@@ -58,14 +58,12 @@ def readResponses(display=False):
 			if display == False:
 				return datafile
 			else:
-# 				display_data = []
-# 				for i in datafile:
-# 					display_data.append(datafile[i])
 				responses = createResponseList(datafile)
+				print(responses, file=sys.stderr)
 				return displayResponses(responses)
 	except:
 		print('Data file read failed.', file=sys.stderr)
-		return None	
+		return None
 
 def saveResponse(input):
 	postdata = readResponses()
@@ -96,7 +94,7 @@ def getResponses():
 def addResponse():
 	input = request.form.to_dict().get('response')
 	saveResponse(input)
-	
+
 	api_response = {'status': 'Success, your response was recorded.'}
 	api_response['response'] = input
 	return jsonify(api_response), 201
