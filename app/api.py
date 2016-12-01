@@ -3,6 +3,9 @@ from flask import jsonify, make_response, request, abort
 
 import sys, json, time
 
+def getAppVersion():
+	return json.load(open('package.json', 'r'))['version']
+
 def get_timestamp():
 	return str(time.time())
 

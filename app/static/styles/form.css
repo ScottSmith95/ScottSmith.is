@@ -33,6 +33,7 @@ input[type="submit"] {
 	background: transparent;
 	color: var(--offwhite);
 	padding: 0.375rem 0.75rem;
+	border-radius: 0;
 	border: 2px solid var(--offwhite);
 	outline: none;
 	cursor: pointer;

@@ -7,30 +7,29 @@
 {% include 'partials/_meta_tags.html' %}
 
 <!-- CSS -->
-<link rel="stylesheet" href="/static/styles/build/app.css">
-
+<link rel="stylesheet" href="/static/styles/build/app.css?{{template_vals.app_version}}">
 </head>
 
 <body>
-	
+
 	<main>
 		<h1>{{template_vals.main_text}}</h1>
 		<form class="input-form" action="/" method="POST">
 			<input type="text" name="response" autofocus>
 			<input type="submit" name="submit" value="Send">
 		</form>
-		
+
 		<div class="response-text">
-			
+
 		</div>
 	</main>
-	
+
 	<svg class="decor-triangle" viewbox="0 0 128 128">
 		<use xlink:href="#triangle">
 	</svg>
-	
+
 	<script async type="text/javascript" src="/static/scripts/build/app.js"></script>
-	
+
 </body>
 
 </html>
