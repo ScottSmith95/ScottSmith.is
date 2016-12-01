@@ -28,6 +28,27 @@ def sanitiseInput(input):
 	input = input.rstrip('.,:;!?').rstrip()
 	return input
 
+def createResponseList(data):
+	responses = []
+	for resp in data:
+		resp_item = {}
+		resp_item['timestamp'] = resp
+		resp_item['message'] = data[resp]
+		responses.append(Response(resp_item))
+	return responses
+	
+def displayResponses(responses):
+	return sorted(responses, key=lambda x: x.timestamp)
+
+class Response():
+	def __init__(self, resp_item):
+		self.timestamp = resp_item['timestamp']
+		self.message = resp_item['message']
+		
+	def __str__(self):
+		return_str = 'Message: %s\nTimestamp: %s\n\n' % (self.message, self.timestamp)
+		return return_str
+
 fname = 'app/data.json'
 
 def readResponses(display=False):
@@ -37,10 +58,11 @@ def readResponses(display=False):
 			if display == False:
 				return datafile
 			else:
-				display_data = []
-				for i in datafile:
-					display_data.append(datafile[i])
-				return display_data
+# 				display_data = []
+# 				for i in datafile:
+# 					display_data.append(datafile[i])
+				responses = createResponseList(datafile)
+				return displayResponses(responses)
 	except:
 		print('Data file read failed.', file=sys.stderr)
 		return None	
