@@ -1,5 +1,5 @@
 from app import app
-from flask import jsonify, make_response, request, abort
+from flask import jsonify, request, redirect, url_for
 
 import requests, sys, json, time
 
@@ -131,7 +131,7 @@ def getRoute():
 		# Throw basic error message if json can't be parsed.
 		if responses == None:
 			error_json = {'error': 'File read error'}
-			return make_response(jsonify(error_json), 500)
+			return jsonify(error_json), 500
 		else:
 			return jsonify(responses)
 	except:
@@ -151,5 +151,8 @@ def addRoute():
 def deleteRoute(timestamp):
 	deleteResponse(timestamp)
 
-	api_response = {'status': 'Message successfully deleted.'}
-	return jsonify(api_response), 200
+	if request.method == 'GET':
+		return redirect(url_for('index'))
+	if request.method == 'DELETE':
+		api_response = {'status': 'Message successfully deleted.'}
+		return jsonify(api_response), 200
