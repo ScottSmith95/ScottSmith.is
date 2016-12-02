@@ -41,7 +41,7 @@ input[type="submit"] {
 
 	&:hover {
 		background-color: var(--offwhite);
-		color: var(--text-color);
+		color: var(--vibe-blue);
 	}
 }
 

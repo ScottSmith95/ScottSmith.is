@@ -152,4 +152,4 @@ def deleteRoute(timestamp):
 	deleteResponse(timestamp)
 
 	api_response = {'status': 'Message successfully deleted.'}
-	return jsonify(api_response), 204
+	return jsonify(api_response), 200
