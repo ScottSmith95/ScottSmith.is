@@ -55,6 +55,16 @@ var responseContainer = document.querySelector('.response-text');
     }
   }
 
+  function handle_form(event) {
+    event = event || window.event;
+    event.preventDefault();
+    var targ = event.target || event.srcElement;
+    var form = targ;
+    var data = new FormData(form);
+    scottis.send_response(post_url, data);
+    form.reset();
+  }
+
 	return {
 		load_responses: load_responses,
 		send_response: send_response
@@ -62,15 +72,5 @@ var responseContainer = document.querySelector('.response-text');
 }));
 
 /* Client Actions */
-function handle_form(event) {
-	event = event || window.event;
-	event.preventDefault();
-	var targ = event.target || event.srcElement;
-	var form = targ;
-	var data = new FormData(form);
-	scottis.send_response(post_url, data);
-	form.reset();
-}
-
 scottis.load_responses(get_url);
-responseForm.addEventListener('submit', handle_form);
+responseForm.addEventListener('submit', scottis.handle_form);

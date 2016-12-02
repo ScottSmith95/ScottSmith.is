@@ -10,12 +10,13 @@ def get_timestamp():
 	return str(time.time())
 
 def isNonemptyResponse(input):
+	input = sanitiseInput(input)
 	if type(input) == 'NoneType': # Do this first, because calling len() on NoneType fails.
 		return False
 	if input == 'None':
 		return False
-# 	if len(input) == 0:
-# 		return False
+	if len(input) == 0:
+		return False
 	return True
 
 def isUniqueResponse(data, input):
@@ -81,8 +82,9 @@ def saveResponse(input):
 	data = readResponses()
 	if isNonemptyResponse(input) and isUniqueResponse(data, input):
 		timestamp = get_timestamp()
+		input = sanitiseInput(input)
 		new_info = {}
-		new_info[timestamp] = sanitiseInput(input)
+		new_info[timestamp] = input
 		data.update(new_info)
 		createSlackWebhook(input, timestamp)
 		try:
@@ -110,18 +112,17 @@ def createSlackWebhook(message, timestamp):
 	hook_url = 'https://hooks.slack.com/services/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'
 	delete_url = request.url_root + 'api/v1.0/delete_response/' + timestamp
 	payload = {
-		'text': 'You are %s' % (message),
 		'attachments': [{
-			'fallback': 'Scott is %s' % (message),
-			# 'title': 'Scott is',
-			'text': 'Delete this message? \n%s' % (delete_url),
+			'fallback': message,
+			'title': message,
+			'text': '<%s|Delete>' % (delete_url),
 			'color': '#167EDA'
 		}]}
 	r = requests.post(hook_url, json=payload)
 
 # API Endpoints
 @app.route('/api/v1.0/get_responses', methods=['GET'])
-def getRoute():
+def apiGetRoute():
 	try:
 		if request.args.get('display') != None:
 			responses = readResponses(display=True)
@@ -139,7 +140,7 @@ def getRoute():
 		return make_response(jsonify(error_json), 500)
 
 @app.route('/api/v1.0/add_response', methods=['POST'])
-def addRoute():
+def apiAddRoute():
 	input = request.form.to_dict().get('response')
 	saveResponse(input)
 
@@ -148,7 +149,7 @@ def addRoute():
 	return jsonify(api_response), 202
 
 @app.route('/api/v1.0/delete_response/<timestamp>', methods=['GET', 'DELETE'])
-def deleteRoute(timestamp):
+def apiDeleteRoute(timestamp):
 	deleteResponse(timestamp)
 
 	if request.method == 'GET':
