@@ -1,7 +1,7 @@
 from app import app
 from flask import jsonify, make_response, request, abort
 
-import sys, json, time
+import requests, sys, json, time
 
 def getAppVersion():
 	return json.load(open('package.json', 'r'))['version']
@@ -80,9 +80,11 @@ def readResponses(display=False, tries=2):
 def saveResponse(input):
 	data = readResponses()
 	if isNonemptyResponse(input) and isUniqueResponse(data, input):
+		timestamp = get_timestamp()
 		new_info = {}
-		new_info[get_timestamp()] = sanitiseInput(input)
+		new_info[timestamp] = sanitiseInput(input)
 		data.update(new_info)
+		createSlackWebhook(input, timestamp)
 		try:
 			with open(fname, 'w') as datafile:
 				json.dump(data, datafile, sort_keys=True, indent=2)
@@ -90,6 +92,16 @@ def saveResponse(input):
 			print('Data file save failed.', file=sys.stderr)
 			return None
 
+# from urllib.parse import urlencode
+# from urllib.request import Request, urlopen
+def createSlackWebhook(message, timestamp):
+	hook_url = 'https://hooks.slack.com/services/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'
+	payload = {'text': message}
+	r = requests.post(hook_url, json=payload)
+
+	# request = Request(hook_url, urlencode(post_fields).encode())
+	# json = urlopen(request).read().decode()
+	# print(json, file=sys.stderr)
 
 # API Endpoints
 @app.route('/api/v1.0/get_responses', methods=['GET'])
