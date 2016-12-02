@@ -23,8 +23,9 @@ def isUniqueResponse(data, input):
 	'''Searches a dict of response data and returns False
 	   If a duplicate entry is found.
 	'''
+	input = input.lower()
 	for response in data:
-		if data[response] == input:
+		if data[response].lower() == input:
 			return False
 	return True
 
