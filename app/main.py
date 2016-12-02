@@ -96,7 +96,7 @@ def saveResponse(input):
 		new_info = {}
 		new_info[timestamp] = input
 		data.update(new_info)
-		# createSlackWebhook(input, timestamp)
+		createSlackWebhook(input, timestamp)
 		try:
 			with open(fname, 'w') as datafile:
 				json.dump(data, datafile, sort_keys=True, indent=2)
