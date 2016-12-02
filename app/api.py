@@ -108,26 +108,16 @@ def deleteResponse(timestamp):
 # from urllib.request import Request, urlopen
 def createSlackWebhook(message, timestamp):
 	hook_url = 'https://hooks.slack.com/services/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'
-	payload = {'text': message,
-				# "attachments": [{
-				# 	"fallback": "This client doesn't support deleting responses.",
-				# 	"callback_id": timestamp,
-				# 	"color": "#167EDA",
-				# 	"attachment_type": "default",
-				# 	"actions": [{
-				# 		"name": "delete",
-				# 		"text": "Delete",
-				# 		"type": "button",
-				# 		"style": "danger",
-				# 		"value": "delete"
-				#   	}]
-				# }]
-			}
+	delete_url = request.url_root + 'api/v1.0/delete_response/' + timestamp
+	payload = {
+		'text': 'You are %s' % (message),
+		'attachments': [{
+			'fallback': 'Scott is %s' % (message),
+			# 'title': 'Scott is',
+			'text': 'Delete this message? \n%s' % (delete_url),
+			'color': '#167EDA'
+		}]}
 	r = requests.post(hook_url, json=payload)
-
-	# request = Request(hook_url, urlencode(post_fields).encode())
-	# json = urlopen(request).read().decode()
-	# print(json, file=sys.stderr)
 
 # API Endpoints
 @app.route('/api/v1.0/get_responses', methods=['GET'])
@@ -157,27 +147,7 @@ def addRoute():
 	api_response['response'] = input
 	return jsonify(api_response), 202
 
-# @app.route('/api/v1.0/slack_messsage_button', methods=['POST'])
-# def slackRoute():
-# 	input = request.form
-# 	print(input, file=sys.stderr)
-# 	try:
-# 		timestamp = input['callback_id']
-# 		print('\n' + timestamp, file=sys.stderr)
-# 		deleteResponse(timestamp)
-# 		api_response = {
-# 			'text': 'Message successfully deleted.'
-# 		}
-# 		return jsonify(api_response), 200
-# 	except:
-# 		api_response = {
-# 			'response_type': 'ephemeral',
-# 			'replace_original': false,
-# 			'text': 'Message deletion failed.'
-# 		}
-# 		return jsonify(api_response), 400
-
-@app.route('/api/v1.0/delete_response/<timestamp>', methods=['DELETE'])
+@app.route('/api/v1.0/delete_response/<timestamp>', methods=['GET', 'DELETE'])
 def deleteRoute(timestamp):
 	deleteResponse(timestamp)
 
