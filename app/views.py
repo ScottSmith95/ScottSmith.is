@@ -7,7 +7,7 @@ from flask import request, render_template
 def index():
 	template_vals = {}
 	template_vals['app_version'] = getAppVersion()
-	template_vals['main_text'] = 'Scott is...'
+	template_vals['main_text'] = 'Scott is…'
 	template_vals['responses'] = readResponses(display=True)
 
 	if request.method == 'POST':

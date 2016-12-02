@@ -92,11 +92,37 @@ def saveResponse(input):
 			print('Data file save failed.', file=sys.stderr)
 			return None
 
+def deleteResponse(timestamp):
+	try:
+		with open(fname, 'r') as datafile:
+			data = json.load(datafile)
+			if timestamp in data:
+			    del data[timestamp]
+		with open(fname, 'w') as datafile:
+			json.dump(data, datafile, sort_keys=True, indent=2)
+	except:
+		print('Delete failed.', file=sys.stderr)
+		return None
+
 # from urllib.parse import urlencode
 # from urllib.request import Request, urlopen
 def createSlackWebhook(message, timestamp):
 	hook_url = 'https://hooks.slack.com/services/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'
-	payload = {'text': message}
+	payload = {'text': message,
+				# "attachments": [{
+				# 	"fallback": "This client doesn't support deleting responses.",
+				# 	"callback_id": timestamp,
+				# 	"color": "#167EDA",
+				# 	"attachment_type": "default",
+				# 	"actions": [{
+				# 		"name": "delete",
+				# 		"text": "Delete",
+				# 		"type": "button",
+				# 		"style": "danger",
+				# 		"value": "delete"
+				#   	}]
+				# }]
+			}
 	r = requests.post(hook_url, json=payload)
 
 	# request = Request(hook_url, urlencode(post_fields).encode())
@@ -105,7 +131,7 @@ def createSlackWebhook(message, timestamp):
 
 # API Endpoints
 @app.route('/api/v1.0/get_responses', methods=['GET'])
-def getResponses():
+def getRoute():
 	try:
 		if request.args.get('display') != None:
 			responses = readResponses(display=True)
@@ -123,10 +149,37 @@ def getResponses():
 		return make_response(jsonify(error_json), 500)
 
 @app.route('/api/v1.0/add_response', methods=['POST'])
-def addResponse():
+def addRoute():
 	input = request.form.to_dict().get('response')
 	saveResponse(input)
 
 	api_response = {'status': 'Success, your response was recorded.'}
 	api_response['response'] = input
 	return jsonify(api_response), 202
+
+# @app.route('/api/v1.0/slack_messsage_button', methods=['POST'])
+# def slackRoute():
+# 	input = request.form
+# 	print(input, file=sys.stderr)
+# 	try:
+# 		timestamp = input['callback_id']
+# 		print('\n' + timestamp, file=sys.stderr)
+# 		deleteResponse(timestamp)
+# 		api_response = {
+# 			'text': 'Message successfully deleted.'
+# 		}
+# 		return jsonify(api_response), 200
+# 	except:
+# 		api_response = {
+# 			'response_type': 'ephemeral',
+# 			'replace_original': false,
+# 			'text': 'Message deletion failed.'
+# 		}
+# 		return jsonify(api_response), 400
+
+@app.route('/api/v1.0/delete_response/<timestamp>', methods=['DELETE'])
+def deleteRoute(timestamp):
+	deleteResponse(timestamp)
+
+	api_response = {'status': 'Message successfully deleted.'}
+	return jsonify(api_response), 204
