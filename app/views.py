@@ -1,5 +1,5 @@
 from app import app
-from .api import getAppVersion, readResponses, saveResponse
+from .main import getAppVersion, readResponses, saveResponse
 from flask import request, render_template
 
 # Index
@@ -8,7 +8,7 @@ def index():
 	template_vals = {}
 	template_vals['app_version'] = getAppVersion()
 	template_vals['main_text'] = 'Scott is…'
-	template_vals['responses'] = readResponses(display=True)
+	# template_vals['responses'] = readResponses(format='json')
 
 	if request.method == 'POST':
 		input = request.form.get("response")

@@ -1,7 +1,7 @@
 boomsvgloader.load('/static/images/icons/icon-sprite.svg');
 
 /* Global Variables */
-var get_url = '/api/v1.0/get_responses?display=true'
+var get_url = '/api/v1.0/get_responses?format=list'
 var post_url = '/api/v1.0/add_response'
 
 /* Page Elements */
