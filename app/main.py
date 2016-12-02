@@ -20,12 +20,18 @@ def isNonemptyResponse(input):
 	return True
 
 def isUniqueResponse(data, input):
+	'''Searches a dict of response data and returns False
+	   If a duplicate entry is found.
+	'''
 	for response in data:
 		if data[response] == input:
 			return False
 	return True
 
 def sanitiseInput(input):
+	'''Ensures input is a typed as a string and
+	   strips extraneous puctuation and spaces.
+	'''
 	input = str(input)
 	input = input.rstrip('.,:;!?').rstrip()
 	return input
@@ -62,16 +68,16 @@ def createDatafile():
 	file.write('{}')
 	file.close
 
-def readResponses(format='list', tries=2):
+def readResponses(format='dict', tries=2):
 	for i in range(tries):
 		try:
 			with open(fname, 'r') as datafile:
 				datafile = json.load(datafile)
-				if format == 'list':
+				if format == 'dict':
+					return datafile
+				elif format == 'list':
 					responses = createResponseList(datafile)
 					return displayResponses(responses)
-				elif format == 'dict':
-					return datafile
 				elif format == 'json':
 					return jsonify(datafile)
 		# If data file is missing, create it and retry.
@@ -83,14 +89,14 @@ def readResponses(format='list', tries=2):
 			return None
 
 def saveResponse(input):
-	data = readResponses()
+	data = readResponses(format='dict')
 	if isNonemptyResponse(input) and isUniqueResponse(data, input):
 		timestamp = get_timestamp()
 		input = sanitiseInput(input)
 		new_info = {}
 		new_info[timestamp] = input
 		data.update(new_info)
-		createSlackWebhook(input, timestamp)
+		# createSlackWebhook(input, timestamp)
 		try:
 			with open(fname, 'w') as datafile:
 				json.dump(data, datafile, sort_keys=True, indent=2)

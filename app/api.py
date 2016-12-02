@@ -8,7 +8,7 @@ api_version = 1.0
 @app.route('/api/v%s/get_responses'%(api_version), methods=['GET'])
 def apiGetRoute():
 	try:
-		if request.args.get('format') == 'list':
+		if request.args.get('format') == 'display':
 			responses = jsonify(readResponses(format='list'))
 		else:
 			responses = readResponses(format='json')

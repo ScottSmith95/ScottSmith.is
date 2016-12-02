@@ -1,7 +1,7 @@
 boomsvgloader.load('/static/images/icons/icon-sprite.svg');
 
 /* Global Variables */
-var get_url = '/api/v1.0/get_responses?format=list'
+var get_url = '/api/v1.0/get_responses?format=display'
 var post_url = '/api/v1.0/add_response'
 
 /* Page Elements */
@@ -35,34 +35,29 @@ var responseContainer = document.querySelector('.response-text');
 	}
 
 	function send_response(url, data) {
+    console.log('sending');
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', url, true);
     httpRequest.onreadystatechange = function() {
-      after_response(url, httpRequest)
+      console.log('callback.');
+      after_response(httpRequest)
     };
 		// httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); This causes HUGE problems.
 		/* Figure out what encoding is correct. plain text and multipart don't work. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest */
 		httpRequest.send(data)
 	}
 
-  function after_response(url, httpRequest) {
+  function after_response(httpRequest) {
+    console.log('after_response');
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      console.log('Waiting for 202.');
       if (httpRequest.status === 202) {
+        console.log('Reloading responses.');
         load_responses(get_url)
       } else {
         console.log('There was a problem with the request.');
       }
     }
-  }
-
-  function handle_form(event) {
-    event = event || window.event;
-    event.preventDefault();
-    var targ = event.target || event.srcElement;
-    var form = targ;
-    var data = new FormData(form);
-    scottis.send_response(post_url, data);
-    form.reset();
   }
 
 	return {
@@ -72,5 +67,16 @@ var responseContainer = document.querySelector('.response-text');
 }));
 
 /* Client Actions */
+function handle_form(event) {
+  console.log('handle_form');
+  event = event || window.event;
+  event.preventDefault();
+  var targ = event.target || event.srcElement;
+  var form = targ;
+  var data = new FormData(form);
+  scottis.send_response(post_url, data);
+  form.reset();
+}
+
 scottis.load_responses(get_url);
-responseForm.addEventListener('submit', scottis.handle_form);
+responseForm.addEventListener('submit', handle_form);

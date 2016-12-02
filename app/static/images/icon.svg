@@ -1,21 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
-    <!-- Generator: Sketch 41.1 (35376) - http://www.bohemiancoding.com/sketch -->
-    <title>icon bw</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon-bw" fill="#000000">
-            <g id="dot3">
-                <circle id="Oval-Copy-4" cx="5.8" cy="13.8" r="1"></circle>
-                <circle id="Oval-Copy-40" cx="9.8" cy="13.8" r="1"></circle>
-                <circle id="Oval-Copy-41" cx="13.8" cy="9.8" r="1"></circle>
-                <circle id="Oval-Copy-42" cx="9.8" cy="9.8" r="1"></circle>
-                <circle id="Oval-Copy-43" cx="5.8" cy="5.8" r="1"></circle>
-                <ellipse id="Oval-Copy-44" cx="1.8" cy="5.8" rx="1" ry="1"></ellipse>
-                <ellipse id="Oval-Copy-45" cx="1.8" cy="1.8" rx="1" ry="1"></ellipse>
-                <circle id="Oval-Copy-46" cx="13.8" cy="1.8" r="1"></circle>
-            </g>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <g fill-rule="evenodd">
+    <circle cx="5.8" cy="13.8" r="1"/>
+    <circle cx="9.8" cy="13.8" r="1"/>
+    <circle cx="13.8" cy="9.8" r="1"/>
+    <circle cx="9.8" cy="9.8" r="1"/>
+    <circle cx="5.8" cy="5.8" r="1"/>
+    <circle cx="1.8" cy="5.8" r="1"/>
+    <circle cx="1.8" cy="1.8" r="1"/>
+    <circle cx="13.8" cy="1.8" r="1"/>
+  </g>
 </svg>
