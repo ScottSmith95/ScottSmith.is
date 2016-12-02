@@ -1,5 +1,9 @@
 boomsvgloader.load('/static/images/icons/icon-sprite.svg');
 
+/* Global Variables */
+var get_url = '/api/v1.0/get_responses?display=true'
+var post_url = '/api/v1.0/add_response'
+
 /* Page Elements */
 var responseForm = document.querySelector('.input-form');
 var submitButton = document.querySelector('.input-form input[type="submit"]');
@@ -21,22 +25,35 @@ var responseContainer = document.querySelector('.response-text');
 	'use strict';
 
 	function load_responses(url) {
-		var ajax = new XMLHttpRequest();
-		ajax.open('GET', url, true);
-		ajax.send();
-		ajax.onload = function(e) {
-			// console.log(ajax.responseText)
-			responseContainer.innerHTML = ajax.responseText;
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.open('GET', url, true);
+		httpRequest.send();
+		httpRequest.onload = function(e) {
+			// console.log(httpRequest.responseText)
+			responseContainer.innerHTML = httpRequest.responseText;
 		};
 	}
 
 	function send_response(url, data) {
-		var ajax = new XMLHttpRequest();
-		ajax.open('POST', url, true);
-		// ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); This causes HUGE problems.
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.open('POST', url, true);
+    httpRequest.onreadystatechange = function() {
+      after_response(url, httpRequest)
+    };
+		// httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); This causes HUGE problems.
 		/* Figure out what encoding is correct. plain text and multipart don't work. https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest */
-		ajax.send(data);
+		httpRequest.send(data)
 	}
+
+  function after_response(url, httpRequest) {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 202) {
+        load_responses(get_url)
+      } else {
+        console.log('There was a problem with the request.');
+      }
+    }
+  }
 
 	return {
 		load_responses: load_responses,
@@ -51,15 +68,9 @@ function handle_form(event) {
 	var targ = event.target || event.srcElement;
 	var form = targ;
 	var data = new FormData(form);
-	scottis.send_response('/api/v1.0/add_response', data);
+	scottis.send_response(post_url, data);
 	form.reset();
-  scottis.load_responses('/api/v1.0/get_responses?display=true')
-
-  // Pull data again in 750ms to prevent data from not refreshing.
-  setTimeout(function(){
-    scottis.load_responses('/api/v1.0/get_responses?display=true')
-  }, 750);
 }
 
-scottis.load_responses('/api/v1.0/get_responses?display=true');
+scottis.load_responses(get_url);
 responseForm.addEventListener('submit', handle_form);

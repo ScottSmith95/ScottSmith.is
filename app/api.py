@@ -117,4 +117,4 @@ def addResponse():
 
 	api_response = {'status': 'Success, your response was recorded.'}
 	api_response['response'] = input
-	return jsonify(api_response), 201
+	return jsonify(api_response), 202
