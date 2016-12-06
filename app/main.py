@@ -29,13 +29,21 @@ def isUniqueResponse(data, input):
 			return False
 	return True
 
+import re, cgi
 def sanitiseInput(input):
 	'''Ensures input is a typed as a string and
 	   strips extraneous puctuation and spaces.
 	'''
-	input = str(input)
-	input = input.rstrip('.,:;!?').rstrip()
-	return input
+	santised = str(input)
+	# Remove HTML like so: http://stackoverflow.com/a/19730306/1867887
+	santised = re.compile(r'(<!--.*?-->|<[^>]*>)')
+	# Remove well-formed tags, fixing mistakes by legitimate users
+	santised = santised.sub('', input)
+	# Clean up anything else by escaping
+	santised = cgi.escape(santised)
+	# Remove extraneous spaces and punctuation too.
+	santised = santised.lstrip().rstrip('.,:;!?').rstrip()
+	return santised
 
 def createResponseList(data):
 	'''Create list of Response objects.'''
