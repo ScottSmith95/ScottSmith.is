@@ -11,9 +11,7 @@ main {
 		margin: 2.5rem auto 0;
 		text-align: center;
     color: var(--offwhite);
-		font: italic normal 5rem/1.2 'Didot', sans-serif;
-    font: normal normal 5rem/1.2 'acier-bat-outline', sans-serif;
-    font: normal normal 5rem/1.2 'acier-bat-noir', sans-serif;
+    font: normal normal 5rem/1.2 'acier-bat-noir', 'Didot', sans-serif;
 
 		@media (min-width: 35em) {
 			font-size: 6.5rem;
@@ -26,9 +24,40 @@ main {
 	background-color: #EDEDED;
   color: var(--darkgrey);
 	font-family: monospace;
-	padding: 2.25rem;
-	margin: 2.5rem auto;
+	padding: 2.5rem;
+	margin: 2.5rem auto 1.25rem;
   box-shadow: 0 3px 50px rgba(255, 255, 255, 0.3);
+}
+
+.status {
+	max-width: 45rem;
+	background-color: #EDEDED;
+	color: var(--darkgrey);
+	font-family: monospace;
+	text-align: center;
+	padding: 1.25rem;
+	margin: 1.25rem auto;
+	box-shadow: 0 3px 50px rgba(255, 255, 255, 0.3);
+
+	&.success {
+		/* Emma's seafoam green. */
+		background-color: #1ABC9C;
+		background-color: #48C9B0;
+		color: var(--offwhite);
+	}
+
+	&.failure {
+		background-color: #DB4A30;
+		color: var(--offwhite);
+	}
+
+	&.remove {
+		animation: remove-status 0.35s ease-in forwards;
+	}
+
+	p {
+		margin: 0;
+	}
 }
 
 .decor-triangle {
@@ -42,5 +71,15 @@ main {
 
 	@media (min-width: 35em) {
 		display: block;
+	}
+}
+
+@keyframes remove-status {
+	from {
+		z-index: -1;
+	}
+	to {
+		transform: translateY(-125vh);
+		opacity: 0;
 	}
 }
