@@ -84,10 +84,8 @@ var responseContainer = document.querySelector('.response-text');
 		httpRequest.open('GET', url, true);
 		httpRequest.send();
 		httpRequest.onload = function(e) {
-			// console.log(httpRequest.responseText)
       response_json = JSON.parse(httpRequest.responseText);
       scottis.layout(response_json);
-			// responseContainer.innerHTML = httpRequest.responseText;
 		};
 	}
 
@@ -128,4 +126,3 @@ var responseContainer = document.querySelector('.response-text');
 boomsvgloader.load('/static/images/icons/icon-sprite.svg');
 scottis.load_responses(get_url);
 responseForm.addEventListener('submit', scottis.handle_form);
-// scottis.make_alert("Hi Emma. 👍", 'success');
