@@ -29,17 +29,21 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 
 	function layout(responses) {
 		// Add Response container to DOM.
+		var response_container = document.querySelector('.responses');
+		if (response_container) {
+			response_container.remove();
+		}
 		var response_container_html = "<ul class='responses'></ul>"
 		mainElement.insertAdjacentHTML('beforeend', response_container_html);
-		var response_container = document.querySelector('.responses');
+		// Redefine element after removal.
+		response_container = document.querySelector('.responses');
 
 		var response_number = Object.keys(responses).length
 		console.log(response_number);
 
 		// Create an Array of random positions.
 		var positions = [];
-		positions = generatePositionsArray(100, 100, response_number, 1);
-
+		positions = generatePositionsArray(100, 100, 5, 1);
 
 		// Position each response with a random position.
 		for (var r in responses) {
