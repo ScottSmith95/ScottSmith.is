@@ -1,5 +1,6 @@
 form {
 	animation: form-intro 0.5s ease-out 0.25s backwards;
+	flex: 0 1 auto;
 	display: flex;
 	text-align: center;
 	width: 85%;

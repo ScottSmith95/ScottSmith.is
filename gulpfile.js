@@ -47,9 +47,9 @@ gulp.task(function sprites() {
 				prefix: '', // Don't prefix output title.
 				sprite: 'icon-sprite' // '.svg' will be appended if not included.
 			}
-		} 
+		}
 	};
-    
+
 	return gulp.src(paths.sprites)
 		.pipe(sprite(options))
 		.pipe(gulp.dest('app/static/images/icons'));
