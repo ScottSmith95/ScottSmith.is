@@ -8,7 +8,7 @@ def index():
 	template_vals = {}
 	template_vals['app_version'] = getAppVersion()
 	template_vals['main_text'] = 'Scott is…'
-	# template_vals['responses'] = readResponses(format='json')
+	# template_vals['responses'] = readResponses(length=5, format='dict')
 
 	if request.method == 'POST':
 		input = request.form.get("response")

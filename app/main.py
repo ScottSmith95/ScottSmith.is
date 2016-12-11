@@ -77,11 +77,25 @@ def createDatafile():
 	file.write('{}')
 	file.close
 
-def readResponses(format='dict', tries=2):
+def readResponses(length=None, format='dict', tries=2):
 	for i in range(tries):
 		try:
 			with open(fname, 'r') as datafile:
 				datafile = json.load(datafile)
+				length = int(length)
+
+				if length is not None:
+					print('dumb scott', file=sys.stderr)
+					# Protect from trying to grab too many keys.
+					if length > len(datafile):
+						length = len(datafile)
+
+					responses = {}
+					for i in range(length):
+						item = datafile.popitem()
+						responses[item[0]] = item[1]
+					datafile = responses
+
 				if format == 'dict':
 					return datafile
 				elif format == 'list':

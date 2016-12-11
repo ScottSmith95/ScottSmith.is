@@ -2,7 +2,7 @@
 
 /* Global Variables */
 var get_url_display = '/api/v1.0/get_responses?format=display'
-var get_url = '/api/v1.0/get_responses?format=json'
+var get_url = '/api/v1.0/get_responses?format=json&length=50'
 var post_url = '/api/v1.0/add_response'
 var response_json
 
@@ -39,7 +39,6 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 		response_container = document.querySelector('.responses');
 
 		var response_number = Object.keys(responses).length
-		console.log(response_number);
 
 		// Position each response with a random position.
 		for (var r in responses) {
