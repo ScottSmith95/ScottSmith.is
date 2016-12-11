@@ -1,6 +1,4 @@
 main {
-	display: flex;
-  flex-flow: column;
   height: 100%;
 	max-width: 45rem;
 	font-size: 1.5rem;
@@ -11,7 +9,6 @@ main {
 	}
 
 	h1 {
-		flex: 0 1 auto;
 		margin: 2.5rem auto 0;
 		text-align: center;
     color: var(--offwhite);
@@ -34,11 +31,9 @@ main {
 }*/
 
 .responses {
-	flex: 1 1 auto;
 	text-align: justify;
 	padding-left: 0;
 	margin: 1.25em auto 0;
-	position: relative;
 }
 
 .article {
@@ -53,23 +48,25 @@ main {
 	display: inline-block;
 	line-height: 1.4;
 	color: var(--offwhite);
-	opacity: 0.8;
+
 	padding: 0 0.35em;
 
 	&.size1 {
-		font-size: 1.2em
+		font-size: 1.2em;
 	}
 
 	&.size2 {
-		font-size: 1.4em
+		font-size: 1.4em;
+		opacity: 0.75;
 	}
 
 	&.size3 {
-		font-size: 1.6em
+		font-size: 1.6em;
+		opacity: 0.75;
 	}
 
 	&.size4 {
-		font-size: 1.8em
+		font-size: 1.8em;
 	}
 }
 
@@ -100,20 +97,6 @@ main {
 
 	p {
 		margin: 0;
-	}
-}
-
-.decor-triangle {
-  display: none;
-  position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 25rem;
-	max-width: 50vmin;
-	height: auto;
-
-	@media (min-width: 35em) {
-		display: block;
 	}
 }
 
