@@ -1,8 +1,8 @@
 from app import app
 from .main import getAppVersion, readResponses, saveResponse
-from flask import request, render_template
+from flask import request, render_template, send_from_directory
 
-import sys
+import os, sys
 
 # Index
 @app.route('/', methods=['GET', 'POST'])
@@ -17,3 +17,9 @@ def index():
 		saveResponse(input)
 
 	return render_template('index.html', template_vals=template_vals)
+
+@app.route('/favicon.ico')
+def favicon():
+	path = os.path.join(app.root_path, 'static/images/favicons')
+	print(path, file=sys.stderr)
+	return send_from_directory(path, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
