@@ -82,10 +82,9 @@ def readResponses(length=None, format='dict', tries=2):
 		try:
 			with open(fname, 'r') as datafile:
 				datafile = json.load(datafile)
-				length = int(length)
 
 				if length is not None:
-					print('dumb scott', file=sys.stderr)
+					length = int(length)
 					# Protect from trying to grab too many keys.
 					if length > len(datafile):
 						length = len(datafile)

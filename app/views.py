@@ -2,6 +2,8 @@ from app import app
 from .main import getAppVersion, readResponses, saveResponse
 from flask import request, render_template
 
+import sys
+
 # Index
 @app.route('/', methods=['GET', 'POST'])
 def index():

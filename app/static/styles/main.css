@@ -31,9 +31,13 @@ main {
 }*/
 
 .responses {
-	text-align: justify;
+	text-align: center;
 	padding-left: 0;
 	margin: 1.25em auto 0;
+
+  @media (min-width: 35em) {
+    text-align: justify;
+  }
 }
 
 .article {
@@ -48,7 +52,6 @@ main {
 	display: inline-block;
 	line-height: 1.4;
 	color: var(--offwhite);
-
 	padding: 0 0.35em;
 
 	&.size1 {
