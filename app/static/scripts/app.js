@@ -99,7 +99,11 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 		var targ = event.target || event.srcElement;
 		var form = targ;
 		if (textInput.value.length > 20) {
-			scottis.make_alert("Try to keep responses under 20 chars.", 'failure');
+			scottis.make_alert("Try to keep responses under 20 chars. 😅", 'failure');
+			return false
+		}
+		if (textInput.value.length == 0) {
+			scottis.make_alert("You've gotta actually have something to say. 😒", 'failure');
 			return false
 		}
 		var data = new FormData(form);
