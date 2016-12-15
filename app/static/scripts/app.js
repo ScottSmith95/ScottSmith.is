@@ -11,6 +11,8 @@ var mainElement = document.querySelector('main');
 var responseForm = document.querySelector('.input-form');
 var textInput = document.querySelector('.input-form input[type="text"]');
 var submitButton = document.querySelector('.input-form input[type="submit"]');
+var helpButton = document.querySelector('header .help');
+var helpText = document.querySelector('.help-text');
 
 /* Client Module */
 (function(root, factory) {
@@ -147,12 +149,29 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 		}
 	}
 
+	function help_button(event) {
+		event = event || window.event;
+		event.preventDefault();
+		helpButton.classList.toggle('visible');
+		helpText.classList.toggle('hidden');
+		helpText.classList.toggle('visible');
+	}
+
+	function help_setup() {
+		if (window.location.hash == '#help') {
+			helpButton.classList.toggle('visible');
+			helpText.classList.remove('hidden');
+		}
+	}
+
 	return {
 		layout: layout,
 		make_alert: make_alert,
 		handle_form: handle_form,
 		load_responses: load_responses,
-		send_response: send_response
+		send_response: send_response,
+		help_button: help_button,
+		help_setup: help_setup
 	};
 }));
 
@@ -160,3 +179,5 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 boomsvgloader.load('/static/images/icons/icon-sprite.svg');
 scottis.load_responses(get_url);
 responseForm.addEventListener('submit', scottis.handle_form);
+scottis.help_setup();
+helpButton.addEventListener('click', scottis.help_button);

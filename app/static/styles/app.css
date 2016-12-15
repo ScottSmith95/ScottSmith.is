@@ -2,5 +2,7 @@
 @import 'variables.css';
 
 @import 'global.css';
+@import 'header.css';
 @import 'main.css';
 @import 'form.css';
+@import 'help.css';

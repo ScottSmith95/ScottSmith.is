@@ -1,5 +1,4 @@
 main {
-  height: 100%;
 	max-width: 45rem;
 	font-size: 1.5rem;
 	margin: 0 auto;
@@ -9,7 +8,7 @@ main {
 	}
 
 	h1 {
-		margin: 2.5rem auto 0;
+		margin: 0 auto;
 		text-align: center;
     color: var(--offwhite);
     font: normal normal 5rem/1.2 'acier-bat-noir', 'Didot', sans-serif;
