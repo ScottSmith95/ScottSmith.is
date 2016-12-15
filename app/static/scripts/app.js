@@ -182,12 +182,6 @@ try {
 	console.log(e)
 }
 
-try {
-	boomsvgloader.load('/static/images/icons/icon-sprite.svg');
-} catch (e) {
-	console.log(e)
-}
-
 scottis.load_responses(get_url);
 responseForm.addEventListener('submit', scottis.handle_form);
 scottis.help_setup();
