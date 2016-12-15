@@ -61,9 +61,12 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 		el.classList.add('size' + mod);
 	}
 
-	function make_alert(text, type) {
+	function make_alert(text, type, duration) {
 		if (type === undefined) {
 				type = 'neutral';
+		}
+		if (duration === undefined) {
+				duration = 4000;
 		}
 
 		if (document.getElementById('status')) {
@@ -80,8 +83,8 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 
 		// Remove alert after 3s.
 		setTimeout(function() {
-			scottis.remove_alert();
-		}, 4000);
+			remove_alert();
+		}, duration);
 	}
 
 	function remove_alert() {
@@ -147,7 +150,6 @@ var submitButton = document.querySelector('.input-form input[type="submit"]');
 	return {
 		layout: layout,
 		make_alert: make_alert,
-		remove_alert: remove_alert,
 		handle_form: handle_form,
 		load_responses: load_responses,
 		send_response: send_response
