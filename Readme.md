@@ -16,5 +16,5 @@ deactivate
 cd root/
 npm i
 gulp build
-Python3 local.py
+python3 local.py
 ```
