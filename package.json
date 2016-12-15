@@ -1,6 +1,6 @@
 {
   "name": "ScottSmith.is",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "What do people really think about you?",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
