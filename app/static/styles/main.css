@@ -74,6 +74,7 @@ main {
 }
 
 .status {
+  animation: add-status 0.35s ease-out backwards;
 	max-width: 45rem;
 	background-color: #EDEDED;
 	color: var(--darkgrey);
@@ -100,6 +101,17 @@ main {
 
 	p {
 		margin: 0;
+	}
+}
+
+@keyframes add-status {
+	from {
+		transform: scale(0.2);
+    opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
 	}
 }
 
