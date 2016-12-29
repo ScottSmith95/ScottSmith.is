@@ -16,10 +16,10 @@
   },
   "homepage": "https://scottsmith.is",
   "devDependencies": {
-    "autoprefixer": "^6.5.0",
+    "autoprefixer": "^6.6.0",
     "boomsvgloader": "0.0.2",
     "css-mqpacker": "^5.0.1",
-    "cssnano": "^3.7.5",
+    "cssnano": "^3.9.1",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.0",
     "gulp-postcss": "^6.2.0",
@@ -28,7 +28,12 @@
     "gulp-uglify": "^2.0.0",
     "normalize.css": "^5.0.0",
     "postcss-custom-properties": "^5.0.1",
-    "postcss-import": "^8.1.2",
+    "postcss-import": "^9.0.0",
     "postcss-nested": "^1.0.0"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 5% in US",
+    "Firefox ESR"
+  ]
 }
