@@ -22,7 +22,7 @@ python3 local.py
 
 Purge and install pip packages: 
 ```
-cd /var/www/scottsmith.is
+cd /var/www/scottsmith.is/root
 rm -rf {bin,local,lib} && rm {.Python,.Python\ 2}
 virtualenv -p python3 .
 source bin/activate
