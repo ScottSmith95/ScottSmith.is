@@ -34,5 +34,10 @@
     "postcss-custom-properties": "^5.0.2",
     "postcss-import": "^9.1.0",
     "postcss-nested": "^1.0.0"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 5% in US",
+    "Firefox ESR"
+  ]
 }

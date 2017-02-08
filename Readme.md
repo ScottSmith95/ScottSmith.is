@@ -20,7 +20,7 @@ gulp build
 python3 local.py
 ```
 
-Purge and install packages: 
+Purge and install pip packages: 
 ```
 cd /var/www/scottsmith.is
 rm -rf {bin,local,lib} && rm {.Python,.Python\ 2}
@@ -32,7 +32,7 @@ deactivate
 
 ```
 
-Update packages: 
+Update pip packages: 
 ```
 cd /var/www/scottsmith.is
 source bin/activate
