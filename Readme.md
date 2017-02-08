@@ -8,13 +8,35 @@ sudo pip3 install virtualenv
 mkdir /var/www/scottsmith.is
 cd /var/www/scottsmith.is
 git clone git@github.com:ScottSmith95/ScottSmith.is.git root
-virtualenv -p python3 root
+cd /var/www/scottsmith.is
+virtualenv -p python3 .
 source root/bin/activate
 pip3 install uwsgi flask
-pip3 install -r root/requirements.txt
+pip3 install -r requirements.txt
 deactivate
 cd root/
 npm i
 gulp build
 python3 local.py
+```
+
+Purge and install packages: 
+```
+cd /var/www/scottsmith.is
+rm -rf {bin,local,lib} && rm {.Python,.Python\ 2}
+virtualenv -p python3 .
+source bin/activate
+pip3 install uwsgi flask
+pip3 install -r requirements.txt
+deactivate
+
+```
+
+Update packages: 
+```
+cd /var/www/scottsmith.is
+source bin/activate
+pip3 install -r requirements.txt --upgrade
+deactivate
+
 ```
